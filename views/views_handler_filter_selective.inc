@@ -71,6 +71,25 @@ class views_handler_filter_selective extends views_handler_filter_in_operator {
   /**
    * {@inheritdoc}
    */
+  public function value_submit($form, &$form_state) {
+    // Backdrop's Form API system automatically puts '0' in for any checkbox
+    // that was not set, and the key to the checkbox if it is set.
+    // Unfortunately, this means that if the key to that checkbox is 0,
+    // we are unable to tell if that checkbox was set or not.
+
+    // Luckily, the '#value' on the checkboxes form actually contains
+    // *only* a list of checkboxes that were set, and we can use that
+    // instead.
+
+    // Since no option values are shown in the Views UI for this filter, check
+    // if $form['value']['#value'] is set to avoid warning.
+
+    $form_state['values']['options']['value'] = isset($form['value']['#value']) ? $form['value']['#value'] : array();
+  } 
+
+  /**
+   * {@inheritdoc}
+   */
   public function value_form(&$form, &$form_state) {
     $this->get_value_options();
     // If you call parent::value_form() and $this->value_options
