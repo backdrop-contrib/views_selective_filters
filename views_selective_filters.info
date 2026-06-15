@@ -1,0 +1,13 @@
+name = "Views Selective Filters"
+description = "Restrict exposed filter values to those present in the result set."
+
+# This file exists as a workaround for a problem that was inherited by the 7.x
+# version of this module: all module files are named views_filters_selective.xyz, but they live
+# inside a views_selective_filters folder (but no matching views_selective_filters.info and
+# views_selective_filters.module files).
+$ See https://github.com/backdrop-contrib/views_selective_filters/issues/9
+
+backdrop = 1.x
+type = module
+dependencies[] = views_selective_filters
+hidden = TRUE
